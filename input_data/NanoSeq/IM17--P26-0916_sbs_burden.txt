@@ -1,0 +1,13 @@
+Uncorrected burden	4.805399724666973e-07
+Uncorrected burden 95% lower	4.4481133119595285e-07
+Uncorrected burden 95% upper	5.183746440528297e-07
+Uncorrected mutation number	669
+Corrected burden	4.919456070046467e-07
+Corrected burden 95% lower	4.5578730600356516e-07
+Corrected burden 95% upper	5.302096246016747e-07
+Corrected mutation number	684.878740465065
+Mutation number per genome	1438.308336657335
+Genome coverage	2923714159.0
+Unmasked burden	5.765199367341542e-07
+Unmasked burden 95% lower	5.374956271682819e-07
+Unmasked burden 95% upper	6.176286604820748e-07

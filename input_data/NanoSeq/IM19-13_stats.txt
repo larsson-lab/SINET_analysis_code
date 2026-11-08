@@ -1,0 +1,10 @@
+Number of Read Families	131528790
+Number of Pass-filter Reads	314931687
+Number of Effective Read Families	19801932
+Effective Coverage	2481682472
+Unmasked Coverage	2503828570
+Effective Indel Coverage	3462200611
+Unmasked Indel Coverage	3469564841
+Per Read Family Coverage 	125.32526987770689
+Pass-filter Duplication Rate	        0.5823577130236501
+Efficiency	0.053124403884300626

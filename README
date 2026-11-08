@@ -1,0 +1,90 @@
+Note! If you want to skip step 1 & 2 - use the prefiltered somatic mutations 
+provided in the folder input_data/WGS: SNVs.tsv (SNVs for all patients), 
+mutations.tsv (SNVs + indels for all patients), and shared_mutations_SNV.rds 
+(matrix with number of overlapping SNVs within each patient). Input files needed 
+for the NanoSeq analysis are provided in the folder input_data/NanoSeq.
+
+# --- 1. Preprocess from FASTQ
+
+A. Whole-genome sequencing (WGS)
+To run the preprocessing the following tools are needed:
+bwa (v0.7.17-r1188)
+samtools (v1.22.1)
+GATK toolkit (v4.1.5.0)
+Varscan (v2.3.9)
+VEP (v109)
+
+  * Align FASTQ files using bwa mem -M.
+  * Identify duplicated reads using MarkDuplicates (GATK toolkit) with default 
+    settings.
+  * Base quality score recalibration using BaseRecalibrator followed by ApplyBQSR 
+    (GATK toolkit), with default settings.
+  * Mutation calling using Mutect2 (GATK toolkit) and Varscan with default settings.  
+  * Annotate filtered mutation calls from Mutect2 using VEP (mutations marked 
+    with PASS in Mutect2 output).
+
+B. Nanorate sequencing (NanoSeq)
+Follow the pipeline provided at https://github.com/AlexandrovLab/DupCaller (version 1.2.1). 
+
+# --- 2. Filter somatic mutation (WGS)
+
+* Run the script scripts/analysis/filter.R. You will need text files with unfiltered mutation calls
+  for each sample (provided from running step 1) together with metadata (provided) 
+  and panel of normals. From this script you get text files of mutations, SNVs and 
+  a matrix with overlapping mutations within each patient, used in further analyses.
+  
+* PON is generated from Germline and LOH calls from Varscan. Variants supported 
+  by > 1 read in the blood normal of > 1 patient are included in the PON, thus 
+  removed from the filtered somatic calls. 
+  
+* The expected tsv files needed to run the script:
+    sample_code.filtered.onlyPASS.vep.tsv: Filtered (only PASS) and vep annotated output from Mutect2 (Expected rownames: sample_id, chr, pos, ref, alt, tumor_alt_read_depth_r1, tumor_alt_read_depth_r2, tumor_ref_read_depth_r1, tumor_ref_read_depth_r2, normal_alt_read_depth_r1, normal_alt_read_depth_r2, normal_ref_read_depth_r1, normal_ref_read_depth_r2, Consequence, IMPACT, SYMBOL, BIOTYPE, Existing_variation, DISTANCE, SIFT, PolyPhen
+    sample_code.filtered.tsv: Raw output from FilterMutectCalls (Expected rownames: sample_id, chr, pos, ref, alt, tumor_alt_read_depth_r1, tumor_alt_read_depth_r2, tumor_ref_read_depth_r1, tumor_ref_read_depth_r2, normal_alt_read_depth_r1, normal_alt_read_depth_r2, normal_ref_read_depth_r1, normal_ref_read_depth_r2)
+    sample_code.indel.Somatic: Unfiltered indel output from Varscan (Expected rownames: chrom, position, ref, var, normal_reads1, normal_reads2, normal_var_freq, normal_gt, tumor_reads1, tumor_reads2, tumor_var_freq, tumor_gt, somatic_status, variant_p_value, somatic_p_value, tumor_reads1_plus, tumor_reads1_minus, tumor_reads2_plus, tumor_reads2_minus, normal_reads1_plus, normal_reads1_minus, normal_reads2_plus normal_reads2_minus)
+    sample_code.snp.Somatic: Unfiltered snp output from Varscan (Expected rownames: Same as sample_code.indel.Somatic.formated)
+    sample_code.indel.Somatic.hc: Filtered (hc) indel output from Varscan (Expected rownames: Same as sample_code.indel.Somatic.formated)
+    sample_code.snp.Somatic.hc: Filtered (hc) snp output from Varscan (Expected rownames: Same as sample_code.indel.Somatic.formated)
+    
+  Note! Indel output from Varscan need to be parsed to match the reference and variant base notation used in Mutect2. 
+
+# --- 3. WGD analysis
+* Run the script 'scripts/analysis/WGD.R' to produce the file 'input_data/WGS/WGD.tsv' 
+  used in 'scripts/analysis/figure2_figure3_read_data.R'. The result is already provided 
+  under 'input_data/WGS/WGD.tsv' and can be used directly in other analyses. 
+
+# --- 4. Signature analysis - SigProfilerAssignment
+
+* To run this analysis, MatrixGenerator (v1.2.25) and SigProfilerAssignment (v0.1.4) 
+  are needed. The input files needed to produce the figure are provided and 
+  can be used directly. 
+* Run the script scripts/analysis/Signatures/matrixgenerator/prepare_input_bootstrap.R
+  to produce the input files for MatrixGenerator. 
+* Run the script scripts/analysis/Signatures/matrixgenerator/prepare_input_bootstrap.R
+* Run the script scripts/analysis/Signatures/sigprofiler/run_SigProfiler_bootstrap.R
+
+# --- 5. Purity, ploidy, and coverage analyses
+
+* Purity: Run the script 'scripts/analysis/PurBayes/run_purbayes.R'. The result 
+  is already provided under 'input_data/WGS/purity.tsv' and this file can be used 
+  directly in other analyses. 
+  
+* Coverage: Run samtools idxstats and summarise the totalt read count 
+  (chr1-22 + chrX and chr Y) for each sample. The result is already provided under 
+  'input_data/WGS/output_idxstats.tsv' and this file can be used directly in 
+  other analyses. 
+
+# --- 6. Reproduce figures
+
+* Run the scripts figure1.R, figure2.R, figure3.R to reproduce the main figures 
+  of the genomic analyses from the paper. The scripts can be found in det folder
+  scripts/main_figures. Note! In figure3.R, the script produces phylogenetic 
+  trees for all patients (Supplementary figure 6) and not only the examples 
+  shown in Figure 3. 
+  
+* Run the scripts in the folder scripts/supp_figures to reproduce 
+  Supplementary figures 2, 5, 7 and figures in Supplementary Note 1.
+
+# --- 7. Supplementary tables
+
+* Run the script 'scripts/supplementary_tables.R' to reproduce Supplementary 
+  tables 1 and 3-7.
