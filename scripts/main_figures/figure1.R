@@ -149,7 +149,7 @@ PCAWG = local({
     filter(Clinical_type != 'blood') %>% 
     filter(Clinical_type != 'normal') %>% 
     filter(Purity > 0.4) %>% 
-    dplyr::select(SNVs, Age, Sample) %>% 
+    dplyr::select(SNVs_purity_corrected, Age, Sample) %>% 
     mutate(histology_abbreviation = 'SI-NET') %>%  
     mutate(histology_tier1 = 'SI-NET') %>% 
     mutate(histology_tier2 = 'SI-NET') %>% 
@@ -192,7 +192,7 @@ dev.off()
 # --- FIGURE 1C and 1F (boxplots) --- ####
 metadata = metadata %>%  mutate(Focality = ifelse(Patient %in% c(12,13,14,15,16), 'unifocal', 'multifocal')) %>% relocate(Focality, .before= SNVs)
 age_data = metadata %>% dplyr::select(Patient, Age, Focality) %>%  distinct(Patient, .keep_all = TRUE)
-SNV_data = metadata %>% filter(!Clinical_type %in% c('blood', 'normal')) %>% filter(Purity > 0.4) %>% dplyr::select(Patient, SNVs, Focality)
+SNV_data = metadata %>% filter(!Clinical_type %in% c('blood', 'normal')) %>% filter(Purity > 0.4) %>% dplyr::select(Patient, SNVs_purity_corrected, Focality)
 
 age_data$Focality = factor(
   age_data$Focality,
@@ -236,7 +236,7 @@ p1 = ggplot(age_data, aes(x = Focality, y = Age, fill = Focality)) +
   theme_classic() +
   theme(legend.position = 'none') 
 
-p2 = ggplot(SNV_data, aes(x = Focality, y = SNVs, fill = Focality)) +
+p2 = ggplot(SNV_data, aes(x = Focality, y = SNVs_purity_corrected, fill = Focality)) +
   geom_boxplot(
     width = 0.5,
     outlier.shape = NA

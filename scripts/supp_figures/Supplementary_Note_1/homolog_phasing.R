@@ -1,8 +1,8 @@
 # Note! To run this script you need the Germline and LOH output files from Varscan.
 # To generate them, you have to follow step 1 in the README
 
-library(dplyr)
-library(readr)
+library(dplyr) #v1.2.1
+library(readr) #v2.1.5
 
 # Load sample metadata -----------------------------------------------------------
 load_metadata = function(){

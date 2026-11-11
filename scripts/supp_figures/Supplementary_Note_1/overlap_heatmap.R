@@ -1,6 +1,6 @@
-library(grid)
-library(dplyr)
-library(readr)
+library(grid) #v.4.3.3
+library(dplyr) #v1.2.1
+library(readr) #v2.1.5
 
 shared_mutations_SNV = readRDS('input_data/WGS/shared_mutations_SNV.rds')
 metadata = read_delim('input_data/metadata.tsv')

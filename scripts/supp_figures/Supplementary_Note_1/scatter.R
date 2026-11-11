@@ -1,5 +1,5 @@
-library(dplyr)
-library(readr)
+library(dplyr) #v1.2.1
+library(readr) #v2.1.5
 
 source('scripts/analysis/extended_metadata.R')
 mutations = read.delim('input_data/WGS/mutations.tsv')

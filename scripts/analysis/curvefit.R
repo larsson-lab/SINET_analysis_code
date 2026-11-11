@@ -1,6 +1,6 @@
-#library(readr)
-#library(dplyr)
-#library(stats)
+library(readr) #v2.1.5
+library(dplyr) #v1.2.1
+library(stats) #v4.3.3
 
 summary = read_delim('input_data/WGS/simulated_WGS.tsv', delim = '\t')
 

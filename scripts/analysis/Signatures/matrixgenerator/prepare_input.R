@@ -1,5 +1,5 @@
-library(dplyr)
-library(readr)
+library(dplyr) #v.1.2.1
+library(readr) #v2.1.5
 
 # Read SINET WGS ####
 SNV_WGS = read_delim("input_data/WGS/SNVs.tsv", delim = '\t', guess_max = 130000)
@@ -58,5 +58,5 @@ SNV_nano_tissue = SNV_nano_tissue %>% mutate(Sample = if_else(Sample %in% c("liv
 
 input_matrixgenerator = rbind(SNV_WGS, SNV_nano, SNV_clonal_nonclonal, SNV_nano_tissue)
 
-path = 'results/matrixgenerator/input_261102.txt'
+path = 'results/matrixgenerator/input.txt'
 write.table(input_matrixgenerator, path, quote = FALSE, sep = '\t', row.names = FALSE)

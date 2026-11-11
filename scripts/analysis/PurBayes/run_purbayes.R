@@ -1,9 +1,9 @@
 SNVs = read.delim('input_data/WGS/SNVs.tsv')
 metadata = read.delim('input_data/metadata.tsv')
 
-library(dplyr)
-library(PurBayes)
-library(readr)
+library(dplyr) #v1.2.1
+library(PurBayes) #v1.3
+library(readr) #v2.1.5
 
 purity_all_samples = c()
 samples = metadata %>% filter(Tumor!= '-') %>% filter(Clinical_type != 'normal') 

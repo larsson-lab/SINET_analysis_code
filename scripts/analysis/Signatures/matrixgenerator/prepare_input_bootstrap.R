@@ -1,7 +1,7 @@
-library(readr)
-library(dplyr)
+library(dplyr) #v.1.2.1
+library(readr) #v2.1.5
 
-input = read_delim('/home/alice/Timing_publication_remake/code_repository/results/matrixgenerator/input_261102.txt', delim = '\t')
+input = read_delim('/home/alice/Timing_publication_remake/code_repository/results/matrixgenerator/input.txt', delim = '\t')
 
 ###BOOTSTRAP AND CREATE INPUT TO MATRIX GENERATOR###
 for (i in 1:500){

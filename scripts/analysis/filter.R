@@ -2,9 +2,9 @@
 # The paths for files from Mutect2 and Varscan are examples - see README for explanation
 
 # Read libraries ####
-library(data.table)
-library(dplyr)
-library(readr)
+library(data.table) #v1.18.6.1
+library(dplyr) #v1.2.1
+library(readr) #v2.1.5
 
 # Load mutations mutect ####
 load_mutations_mutect = function(sample, meta_data){

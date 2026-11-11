@@ -38,16 +38,17 @@ Follow the pipeline provided at https://github.com/AlexandrovLab/DupCaller (vers
   removed from the filtered somatic calls. 
   
 * The expected tsv files needed to run the script:
-    sample_code.filtered.onlyPASS.vep.tsv: Filtered (only PASS) and vep annotated output from Mutect2 (Expected rownames: sample_id, chr, pos, ref, alt, tumor_alt_read_depth_r1, tumor_alt_read_depth_r2, tumor_ref_read_depth_r1, tumor_ref_read_depth_r2, normal_alt_read_depth_r1, normal_alt_read_depth_r2, normal_ref_read_depth_r1, normal_ref_read_depth_r2, Consequence, IMPACT, SYMBOL, BIOTYPE, Existing_variation, DISTANCE, SIFT, PolyPhen
-    sample_code.filtered.tsv: Raw output from FilterMutectCalls (Expected rownames: sample_id, chr, pos, ref, alt, tumor_alt_read_depth_r1, tumor_alt_read_depth_r2, tumor_ref_read_depth_r1, tumor_ref_read_depth_r2, normal_alt_read_depth_r1, normal_alt_read_depth_r2, normal_ref_read_depth_r1, normal_ref_read_depth_r2)
-    sample_code.indel.Somatic: Unfiltered indel output from Varscan (Expected rownames: chrom, position, ref, var, normal_reads1, normal_reads2, normal_var_freq, normal_gt, tumor_reads1, tumor_reads2, tumor_var_freq, tumor_gt, somatic_status, variant_p_value, somatic_p_value, tumor_reads1_plus, tumor_reads1_minus, tumor_reads2_plus, tumor_reads2_minus, normal_reads1_plus, normal_reads1_minus, normal_reads2_plus normal_reads2_minus)
-    sample_code.snp.Somatic: Unfiltered snp output from Varscan (Expected rownames: Same as sample_code.indel.Somatic.formated)
-    sample_code.indel.Somatic.hc: Filtered (hc) indel output from Varscan (Expected rownames: Same as sample_code.indel.Somatic.formated)
-    sample_code.snp.Somatic.hc: Filtered (hc) snp output from Varscan (Expected rownames: Same as sample_code.indel.Somatic.formated)
+    - sample_code.filtered.onlyPASS.vep.tsv: Filtered (only PASS) and vep annotated output from Mutect2 (Expected rownames: sample_id, chr, pos, ref, alt, tumor_alt_read_depth_r1, tumor_alt_read_depth_r2, tumor_ref_read_depth_r1, tumor_ref_read_depth_r2, normal_alt_read_depth_r1, normal_alt_read_depth_r2, normal_ref_read_depth_r1, normal_ref_read_depth_r2, Consequence, IMPACT, SYMBOL, BIOTYPE, Existing_variation, DISTANCE, SIFT, PolyPhen
+    - sample_code.filtered.tsv: Raw output from FilterMutectCalls (Expected rownames: sample_id, chr, pos, ref, alt, tumor_alt_read_depth_r1, tumor_alt_read_depth_r2, tumor_ref_read_depth_r1, tumor_ref_read_depth_r2, normal_alt_read_depth_r1, normal_alt_read_depth_r2, normal_ref_read_depth_r1, normal_ref_read_depth_r2)
+    - sample_code.indel.Somatic: Unfiltered indel output from Varscan (Expected rownames: chrom, position, ref, var, normal_reads1, normal_reads2, normal_var_freq, normal_gt, tumor_reads1, tumor_reads2, tumor_var_freq, tumor_gt, somatic_status, variant_p_value, somatic_p_value, tumor_reads1_plus, tumor_reads1_minus, tumor_reads2_plus, tumor_reads2_minus, normal_reads1_plus, normal_reads1_minus, normal_reads2_plus normal_reads2_minus)
+    - sample_code.snp.Somatic: Unfiltered snp output from Varscan (Expected rownames: Same as sample_code.indel.Somatic.formated)
+    - sample_code.indel.Somatic.hc: Filtered (hc) indel output from Varscan (Expected rownames: Same as sample_code.indel.Somatic.formated)
+    - sample_code.snp.Somatic.hc: Filtered (hc) snp output from Varscan (Expected rownames: Same as sample_code.indel.Somatic.formated)
     
   Note! Indel output from Varscan need to be parsed to match the reference and variant base notation used in Mutect2. 
 
 # --- 3. WGD analysis
+
 * Run the script 'scripts/analysis/WGD.R' to produce the file 'input_data/WGS/WGD.tsv' 
   used in 'scripts/analysis/figure2_figure3_read_data.R'. The result is already provided 
   under 'input_data/WGS/WGD.tsv' and can be used directly in other analyses. 
@@ -56,7 +57,7 @@ Follow the pipeline provided at https://github.com/AlexandrovLab/DupCaller (vers
 
 * To run this analysis, MatrixGenerator (v1.2.25) and SigProfilerAssignment (v0.1.4) 
   are needed. The input files needed to produce the figure are provided and 
-  can be used directly. 
+  can be used directly to reproduce figures. 
 * Run the script scripts/analysis/Signatures/matrixgenerator/prepare_input_bootstrap.R
   to produce the input files for MatrixGenerator. 
 * Run the script scripts/analysis/Signatures/matrixgenerator/prepare_input_bootstrap.R
@@ -78,11 +79,14 @@ Follow the pipeline provided at https://github.com/AlexandrovLab/DupCaller (vers
 * Run the scripts figure1.R, figure2.R, figure3.R to reproduce the main figures 
   of the genomic analyses from the paper. The scripts can be found in det folder
   scripts/main_figures. Note! In figure3.R, the script produces phylogenetic 
-  trees for all patients (Supplementary figure 6) and not only the examples 
+  trees for all patients (Supplementary figure 7) and not only the examples 
   shown in Figure 3. 
   
 * Run the scripts in the folder scripts/supp_figures to reproduce 
-  Supplementary figures 2, 5, 7 and figures in Supplementary Note 1.
+  Supplementary figures 1-2, 4-6 and figures in Supplementary Note 1. 
+  
+* Supplementary Figure 3 can be recreated by loading a seg-file from Battenberg
+  into IGV and using the homolog phasing retreived from Supplementary_Note_1/homolog_phasing.R.
 
 # --- 7. Supplementary tables
 

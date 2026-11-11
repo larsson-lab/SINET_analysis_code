@@ -1,18 +1,18 @@
 # Read libraries ####
-library(readr)
-library(vcfR)
-library(dplyr)
-library(deconstructSigs)
-library(BSgenome.Hsapiens.UCSC.hg38)
-library(tidyverse)
-library(ggpmisc)
-library(gtools)
-library(ComplexHeatmap)
-library(circlize)
-library(lsa)
-library(ggnewscale)
-library(ggplot2)
-library(patchwork)
+library(readr) #v2.1.5
+library(vcfR) #v1.16.0
+library(dplyr) #v.1.2.1
+library(deconstructSigs) #v1.9.0
+library(BSgenome.Hsapiens.UCSC.hg38) #v1.4.5
+library(tidyverse) #v2.0.0
+library(ggpmisc) #v1.0.0
+library(gtools) #v3.9.5
+library(ComplexHeatmap) #v2.18.0
+library(circlize) #v0.4.18
+library(lsa) #v0.73.4
+library(ggnewscale) #v0.5.2
+library(ggplot2) #v4.0.3
+library(patchwork) #v1.3.2
 
 # Load needed input data ####
 SNVs = read.delim('input_data/WGS/SNVs.tsv', sep = '\t')

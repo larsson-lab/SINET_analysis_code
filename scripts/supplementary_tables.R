@@ -1,5 +1,5 @@
-library(dplyr)
-library(readr)
+library(dplyr) #v1.2.1
+library(readr) #v2.1.5
 
 # --- Supplementary table 1 ####
 source('scripts/analysis/extended_metadata.R')
@@ -41,16 +41,17 @@ write_delim(supp3, 'supplementary_tables/supp3.tsv', delim = '\t')
 
 # --- Supplementary table 4 ####
 source('scripts/analysis/figure2_figure3_read_data.R')
-burden_all = burden_all %>% select(Sample, `Uncorrected burden`, `Uncorrected burden 95% lower`, `Uncorrected burden 95% upper`, mutation_rate, mutation_rate_scaled, B_normal)
+burden_all = burden_all %>% select(sample_name, Sample, `Uncorrected burden`, `Uncorrected burden 95% lower`, `Uncorrected burden 95% upper`, mutation_rate, mutation_rate_scaled, B_normal)
 stats_all = stats_all %>% select(Sample, `Effective Coverage`, `Number of Effective Read Families`, `Pass-filter Duplication Rate`, count)
 supp4 = inner_join(burden_all, stats_all, by = 'Sample')
 supp4 = inner_join(supp4, metadata_WGS, by = 'Sample')
 supp4 = supp4 %>% 
-  select(Sample, Patient, Age, Clinical_type, `Effective Coverage`, `Number of Effective Read Families`, `Pass-filter Duplication Rate`, count, `Uncorrected burden`, `Uncorrected burden 95% lower`, `Uncorrected burden 95% upper`, mutation_rate, mutation_rate_scaled, B_normal) %>% 
+  select(sample_name, Sample, Patient, Age, Clinical_type, `Effective Coverage`, `Number of Effective Read Families`, `Pass-filter Duplication Rate`, count, `Uncorrected burden`, `Uncorrected burden 95% lower`, `Uncorrected burden 95% upper`, mutation_rate, mutation_rate_scaled, B_normal) %>% 
   rename(count = 'SNVs') %>% 
   rename(mutation_rate = 'Mutation rate (SNVs per diploid genome per year)') %>% 
   rename(mutation_rate_scaled = 'Adjusted mutation rate') %>% 
-  rename(B_normal = 'Assumed normal tissue mutation rate') 
+  rename(B_normal = 'Assumed normal tissue mutation rate') %>% 
+  rename(sample_name = 'Library ID')
 supp4 = supp4 %>% 
   mutate(`Mutation rate (SNVs per diploid genome per year)` = round(`Mutation rate (SNVs per diploid genome per year)`, digits = 2)) %>% 
   mutate(`Adjusted mutation rate` = round(`Adjusted mutation rate`, digits = 2)) %>% 
