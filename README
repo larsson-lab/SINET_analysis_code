@@ -95,7 +95,8 @@ and can be used to reproduce the results.
   * Run the script scripts/analysis/WGD.R to generate the file input_data/WGS/WGD.tsv, 
     which is used in scripts/analysis/figure2_figure3_read_data.R.
     
-  * The resulting file is already provided at input_data/WGS/WGD.tsv and can be used directly in subsequent analyses.
+  * The resulting file is already provided at input_data/WGS/WGD.tsv and can be used directly in 
+    subsequent analyses.
 
 # --- 4. Signature analysis - SigProfilerAssignment
 
