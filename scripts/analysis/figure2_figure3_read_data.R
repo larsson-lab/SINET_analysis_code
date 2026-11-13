@@ -119,9 +119,9 @@ fractions_scaled = fractions_scaled %>%
 # --- PREPARE DATA FOR TRINUCPROFILE CLONAL VS NON-CLONAL --- ####
 clonal = clonal %>% mutate(group = 'clonal') 
 nonclonal = anti_join(mutations %>% mutate(POS = as.double(POS)) %>% filter(Clinical_type != 'blood'), clonal, by = c('CHROM', 'POS', 'REF', 'ALT', 'Library')) %>% 
-  mutate(group = 'nonclonal') %>% dplyr::select('group', 'CHROM', 'POS', 'REF', 'ALT')
-clonal = clonal %>% dplyr::select('group', 'CHROM', 'POS', 'REF', 'ALT')
-clonal_nonclonal = rbind(clonal, nonclonal)
+  mutate(group = 'nonclonal') %>% dplyr::select('group', 'CHROM', 'POS', 'REF', 'ALT', 'Clinical_type')
+clonal = clonal %>% dplyr::select('group', 'CHROM', 'POS', 'REF', 'ALT', 'Clinical_type')
+clonal_nonclonal = rbind(clonal, nonclonal) %>% filter(Clinical_type != 'normal') %>% dplyr::select('group', 'CHROM', 'POS', 'REF', 'ALT')
 colnames(clonal_nonclonal) = c('group', 'chr', 'pos', 'ref', 'alt')
 write_delim(clonal_nonclonal, 'input_data/clonal_nonclonal.tsv', delim = '\t') #write to memory to use in signature analysis
 clonal_nonclonal_profile = mut.to.sigs.input(clonal_nonclonal, sample.id = 'group', bsg= BSgenome.Hsapiens.UCSC.hg38) 

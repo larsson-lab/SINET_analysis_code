@@ -35,7 +35,7 @@ load_mutations_varscan_extended= function(sample, meta_data){
                    filter(meta_data$Sample == as.character(sample)) %>%
                    select(Library))[[1]]
   # tsv output from Varscan (not hc)
-  file_indels = paste('vcf/varscan/', sample_code,'.indel.Somatic.formated', sep="") #Do not forget to rewrite varscan indels!
+  file_indels = paste('vcf/varscan/', sample_code,'.indel.Somatic', sep="") #Do not forget to rewrite varscan indels!
   file_snps = paste('vcf/varscan/', sample_code, '.snp.Somatic', sep="") 
   indels = read_tsv(file_indels, show_col_types = FALSE)
   snps = read_tsv(file_snps, show_col_types = FALSE)
@@ -61,7 +61,7 @@ load_mutations_varscan= function(sample, meta_data){
                    filter(meta_data$Sample == as.character(sample)) %>%
                    select(Library))[[1]]
   # tsv output from Varscan (hc)
-  file_indels = paste('vcf/varscan/', sample_code,'.indel.Somatic.hc.formated', sep="") 
+  file_indels = paste('vcf/varscan/', sample_code,'.indel.Somatic.hc', sep="") 
   file_snps = paste('vcf/varscan/', sample_code,'.snp.Somatic.hc', sep="") 
   indels = read_tsv(file_indels, show_col_types = FALSE)
   snps = read_tsv(file_snps, show_col_types = FALSE)

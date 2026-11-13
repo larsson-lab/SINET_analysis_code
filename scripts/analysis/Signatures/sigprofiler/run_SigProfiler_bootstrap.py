@@ -16,6 +16,12 @@ def runAssignment(i):
     os.remove(output + '/Assignment_Solution/Activities/Decomposed_MutationType_Probabilities.txt')
     print(str(i) + ' version 3.2 is finished')
 
-pool_obj = multiprocessing.Pool(processes=4)
-ans = pool_obj.map(runAssignment,range(1, 501))
-pool_obj.close()
+#pool_obj = multiprocessing.Pool(processes=4)
+#ans = pool_obj.map(runAssignment,range(1, 501))
+#pool_obj.close()
+
+if __name__ == '__main__':
+    multiprocessing.freeze_support()
+
+    with multiprocessing.Pool(processes=30) as pool:
+        ans = pool.map(runAssignment, range(1, 501))
