@@ -40,7 +40,8 @@ Preprocessing steps:
 
   * Align FASTQ files using bwa mem -M.
   * Identify duplicate reads using MarkDuplicates (GATK toolkit) with default settings.
-  * Perform base quality score recalibration using BaseRecalibrator followed by ApplyBQSR (GATK toolkit), with default settings.
+  * Perform base quality score recalibration using BaseRecalibrator followed by ApplyBQSR (GATK toolkit), 
+    with default settings.
   * Perform mutation calling using Mutect2 (GATK toolkit) and VarScan with default settings.
   * Annotate filtered mutation calls from Mutect2 using VEP (mutations marked as PASS in the Mutect2 output).
 
@@ -68,8 +69,8 @@ and can be used to reproduce the results.
     - sample_code.filtered.onlyPASS.vep.tsv: Filtered (PASS only) and VEP-annotated output from Mutect2. 
       (Expected columns: sample_id, chr, pos, ref, alt, tumor_alt_read_depth_r1, tumor_alt_read_depth_r2, 
       tumor_ref_read_depth_r1, tumor_ref_read_depth_r2, normal_alt_read_depth_r1, normal_alt_read_depth_r2, 
-      normal_ref_read_depth_r1, normal_ref_read_depth_r2, Consequence, IMPACT, SYMBOL, BIOTYPE, Existing_variation, 
-      DISTANCE, SIFT, PolyPhen
+      normal_ref_read_depth_r1, normal_ref_read_depth_r2, Consequence, IMPACT, SYMBOL, BIOTYPE, 
+      Existing_variation, DISTANCE, SIFT, PolyPhen
     - sample_code.filtered.tsv: Raw output from FilterMutectCalls.
       (Expected columns: sample_id, chr, pos, ref, alt, tumor_alt_read_depth_r1, tumor_alt_read_depth_r2, 
       tumor_ref_read_depth_r1, tumor_ref_read_depth_r2, normal_alt_read_depth_r1, normal_alt_read_depth_r2, 
